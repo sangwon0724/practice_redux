@@ -27,9 +27,11 @@ const deleteToDo = id => {
 const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [{ text: action.text, id: Date.now() }, ...state];
+      const newToDoObj = { text: action.text, id: Date.now() };
+      return [newToDoObj, ...state];
     case DELETE_TODO:
-      return state.filter(toDo => toDo.id !== action.id); //redux는 값을 삭제하는 것이 아닌 수정하는 작업을 한다.
+      const cleaned = state.filter(toDo => toDo.id !== action.id);
+      return cleaned; //redux는 값을 삭제하는 것이 아닌 수정하는 작업을 한다.
     default:
       return state;
   }
