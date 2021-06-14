@@ -7,10 +7,27 @@ const ul = document.querySelector("ul");
 const ADD_TODO = "ADD_TODO";
 const DELETE_TODO = "DELETE_TODO";
 
+//action
+const addToDo = text => {
+  return {
+    type: ADD_TODO,
+    text
+  };
+};
+
+//action
+const deleteToDo = id => {
+  return {
+    type: DELETE_TODO,
+    id
+  };
+};
+
+//reducer
 const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [...state, { text: action.text, id: Date.now() }];
+      return [{ text: action.text, id: Date.now() }, ...state];
     case DELETE_TODO:
       return [];
     default:
@@ -18,15 +35,48 @@ const reducer = (state = [], action) => {
   }
 };
 
+//createStore
 const store = createStore(reducer);
 
+//subscribe
 store.subscribe(() => console.log(store.getState()));
 
+//dispatch
+const dispatchAddToDo = text => {
+  store.dispatch(addToDo(text)); //Todo list 추가
+};
+
+//dispatch
+const dispatchDeleteToDo = e => {
+  const id = e.target.parentNode.id;
+  store.dispatch(deleteToDo(id)); //Todo list 삭제
+};
+
+//event function
+const paintToDos = () => {
+  const toDos = store.getState();
+  ul.innerHTML = "";
+  toDos.forEach(toDo => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.innerText = "DEL";
+    btn.addEventListener("click", dispatchDeleteToDo);
+    li.id = toDo.id;
+    li.innerText = toDo.text;
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+};
+
+//subscribe
+store.subscribe(paintToDos);
+
+//event function
 const onSubmit = e => {
   e.preventDefault();
   const toDo = input.value;
   input.value = "";
-  store.dispatch({ type: ADD_TODO, text: toDo });
+  dispatchAddToDo(toDo); //dispatch 함수 실행
 };
 
 form.addEventListener("submit", onSubmit);
