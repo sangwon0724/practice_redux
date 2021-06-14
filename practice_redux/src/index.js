@@ -29,7 +29,7 @@ const reducer = (state = [], action) => {
     case ADD_TODO:
       return [{ text: action.text, id: Date.now() }, ...state];
     case DELETE_TODO:
-      return [];
+      return state.filter(toDo => toDo.id !== action.id); //redux는 값을 삭제하는 것이 아닌 수정하는 작업을 한다.
     default:
       return state;
   }
@@ -48,7 +48,7 @@ const dispatchAddToDo = text => {
 
 //dispatch
 const dispatchDeleteToDo = e => {
-  const id = e.target.parentNode.id;
+  const id = parseInt(e.target.parentNode.id);
   store.dispatch(deleteToDo(id)); //Todo list 삭제
 };
 
