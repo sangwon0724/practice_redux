@@ -16,7 +16,7 @@ function ToDo({ text, onBtnClick, id }) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     onBtnClick: () => dispatch(actionCreators.deleteToDo(ownProps.id))
-  }; //ToDo의 인자 중 onBtnClick
-}
+  }; 
+}//ToDo의 인자 중 onBtnClick
 
 export default connect(null, mapDispatchToProps)(ToDo);

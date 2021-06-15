@@ -33,15 +33,15 @@ function Home({ toDos, addToDo }) {
 function mapStateToProps(state) {
   console.log("mapStateToProps - Home");
   console.log(state);
-  return { toDos: state }; //Home의 인자중 toDos
-}
+  return { toDos: state }; 
+} //Home의 인자중 toDos
 
 
 function mapDispatchToProps(dispatch) {
   console.log("mapDispatchToProps - Home");
   return {
     addToDo: text => dispatch(actionCreators.addToDo(text))
-  }; //Home의 인자중 addToDo
-}
+  };
+} //Home의 인자중 addToDo
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
