@@ -5,6 +5,8 @@ import App from './components/App';
 import { Provider } from "react-redux";
 import store from "./store";
 
+//Provider => 값이 바뀔때마다 랜더링을 시킨다.
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

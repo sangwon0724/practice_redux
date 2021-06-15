@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 function Detail({ toDo }) {
+    console.log("execute Detail");
   return (
     <>
       <h1>{toDo?.text}</h1>
@@ -11,6 +12,7 @@ function Detail({ toDo }) {
 }
 
 function mapStateToProps(state, ownProps) {
+    console.log("mapStateToProps - Detail");
   const {
     match: {
       params: { id }

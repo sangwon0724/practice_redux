@@ -4,6 +4,7 @@ import { actionCreators } from "../store";
 import ToDo from "../components/ToDo";
 
 function Home({ toDos, addToDo }) {
+  console.log("execute Home");
   const [text, setText] = useState("");
   function onChange(e) {
     setText(e.target.value);
@@ -30,15 +31,17 @@ function Home({ toDos, addToDo }) {
 }
 
 function mapStateToProps(state) {
+  console.log("mapStateToProps - Home");
   console.log(state);
-  return { toDos: state };
+  return { toDos: state }; //Home의 인자중 toDos
 }
 
 
 function mapDispatchToProps(dispatch) {
+  console.log("mapDispatchToProps - Home");
   return {
     addToDo: text => dispatch(actionCreators.addToDo(text))
-  };
+  }; //Home의 인자중 addToDo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
